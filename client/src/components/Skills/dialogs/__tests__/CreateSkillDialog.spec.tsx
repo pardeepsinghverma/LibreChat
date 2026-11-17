@@ -151,4 +151,14 @@ describe('CreateSkillDialog', () => {
     );
     expect(handleAgentSubmit).not.toHaveBeenCalled();
   });
+
+  it('renders a scrollable container with overflow-y-auto to keep action buttons accessible', () => {
+    render(<CreateSkillDialog isOpen={true} setIsOpen={mockSetIsOpen} />);
+
+    const form = screen.getByRole('button', { name: 'Create' }).closest('form');
+    expect(form).not.toBeNull();
+    expect(form?.className).toContain('overflow-y-auto');
+    expect(form?.className).toContain('max-h-[80vh]');
+    expect(form?.className).not.toContain('overflow-hidden');
+  });
 });
